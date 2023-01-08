@@ -40,46 +40,46 @@ class ImageController extends Controller
         if($request->o_type == 'user'){
             $user = User::find($request->o_id);
             $image = Image::create($request->all());
-            if(!$user){
-                return response()->json([
-                        'status' => 400,
-                        'error' => 'User not found'
-                    ]);
-            }else{
-                if(!$image){
-                    return response()->json([
-                        'status' => 400,
-                        'error' => 'Error while inserting'
-                    ]);
-                }else{
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Inserted successfully'
-                    ]);
-                }
-            }
+            // if(!$user){
+            //     return response()->json([
+            //             'status' => 400,
+            //             'error' => 'User not found'
+            //         ]);
+            // }else{
+            //     if(!$image){
+            //         return response()->json([
+            //             'status' => 400,
+            //             'error' => 'Error while inserting'
+            //         ]);
+            //     }else{
+            //         return response()->json([
+            //             'status' => 200,
+            //             'message' => 'Inserted successfully'
+            //         ]);
+            //     }
+            // }
         }
         if($request->o_type == 'product'){
             $product = Product::find($request->o_id);
             $image = Image::create($request->all());
-            if(!$product){
-                return response()->json([
-                        'status' => 400,
-                        'error' => 'Product not found'
-                    ]);
-            }else{
-                if(!$image){
-                    return response()->json([
-                        'status' => 400,
-                        'error' => 'Error while inserting'
-                    ]);
-                }else{
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Inserted successfully'
-                    ]);
-                }
-            }
+            // if(!$product){
+            //     return response()->json([
+            //             'status' => 400,
+            //             'error' => 'Product not found'
+            //         ]);
+            // }else{
+            //     if(!$image){
+            //         return response()->json([
+            //             'status' => 400,
+            //             'error' => 'Error while inserting'
+            //         ]);
+            //     }else{
+            //         return response()->json([
+            //             'status' => 200,
+            //             'message' => 'Inserted successfully'
+            //         ]);
+            //     }
+            // }
         }
     }
 

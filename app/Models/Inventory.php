@@ -15,5 +15,5 @@ class Inventory extends Model
         'amount'
     ];
 
-    public $table = 'inventory';
+    public $table = 'product_unit';
 }

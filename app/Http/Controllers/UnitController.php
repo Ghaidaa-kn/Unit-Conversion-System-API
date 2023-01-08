@@ -35,7 +35,13 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        $unit = Unit::create($request->all());
+        $exist = Unit::where('name' , $request->name)->get()->first();
+        if(!$exist){
+            $unit = Unit::create($request->all());
+        }else{
+            $unit = false;
+        }
+
         if(!$unit){
             return response()->json([
                 'status' => 400,

@@ -38,7 +38,12 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $data = Product::create($request->all());
+        $exist = Unit::where('name' , $request->name)->get()->first();
+        if(!$exist){
+            $data = Product::create($request->all());
+        }else{
+            $data = false;
+        }
 
         if(!$data){
             return response()->json([
@@ -66,18 +71,18 @@ class ProductController extends Controller
         
         if($unit_id == ""){
             $total_qty = DB::table('products')
-                   ->join('inventory' , 'inventory.product_id' , 'products.id')
-                   ->join('units' ,'inventory.unit_id' , 'units.id')
+                   ->join('product_unit' , 'product_unit.product_id' , 'products.id')
+                   ->join('units' ,'product_unit.unit_id' , 'units.id')
                    ->where('products.id',$product_id)
-                   ->selectRaw('sum(units.modifier * inventory.amount) as qty')
+                   ->selectRaw('sum(units.modifier * product_unit.amount) as qty')
                    ->get();
         }else{
             $total_qty = DB::table('products')
-                   ->join('inventory' , 'inventory.product_id' , 'products.id')
-                   ->join('units' ,'inventory.unit_id' , 'units.id')
+                   ->join('product_unit' , 'product_unit.product_id' , 'products.id')
+                   ->join('units' ,'product_unit.unit_id' , 'units.id')
                    ->where('products.id',$product_id)
-                   ->where('inventory.unit_id',$unit_id)
-                   ->selectRaw('sum(units.modifier * inventory.amount) as qty')
+                   ->where('product_unit.unit_id',$unit_id)
+                   ->selectRaw('sum(units.modifier * product_unit.amount) as qty')
                    ->get();
         }
 

@@ -54,6 +54,6 @@ class User extends Authenticatable
     public function getImagePathAttribute()
     {
         return Image::where('o_id' , $this->id)->where('o_type' , 'user')
-               ->select('path')->get();
+               ->select('path')->get()->first();
     }
 }
